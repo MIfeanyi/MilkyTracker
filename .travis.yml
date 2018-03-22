@@ -22,6 +22,13 @@ matrix:
           - cmake --build .
           - cpack
           - popd
+        install:
+          - sudo apt-get -y install qt59base
+          - source /opt/qt*/bin/qt*-env.sh
+          - sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
+          - sudo apt-get update -qq
+
+          script: *cmake_build
       - os: osx
         before_install:
           - brew update
@@ -32,12 +39,7 @@ matrix:
           - rm docerator-2.0.zip
           - /usr/bin/python genicons.py
           - popd
-          - sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
-          - sudo apt-get update -qq
-	install:
-	  - sudo apt-get -y install qt59base
-  	  - source /opt/qt*/bin/qt*-env.sh
-        script: *cmake_build
+
 deploy:
   skip_cleanup: true
   provider: releases
