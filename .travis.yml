@@ -23,10 +23,14 @@ matrix:
         script: &cmake_build
           - mkdir build
           - pushd build
-          - cmake -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7 ..
+          - cmake -DCMAKE_OSX_DEPLOYMENT_TARGET=10.7 -DCMAKE_INSTALL_PREFIX=/usr ..
           - cmake --build .
           - cpack
           - make install DESTDIR=AppDir/
+          - mkdir -p AppDir/usr/share/applications/ AppDir/usr/share/icons/hicolor/256x256
+          - cp resources/*.desktop AppDir/usr/share/applications/
+          - cp resources/pictures/milkytracker.png AppDir/usr/share/icons/hicolor/256x256
+          - mv -v build/src/tracker/milkytracker AppDir/usr/bin/MilkyTracker
           - find AppDir/
           - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
           - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
