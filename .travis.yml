@@ -32,6 +32,7 @@ matrix:
           - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
           - mkdir -p AppDir/usr/bin;
           - cp resources/*.desktop AppDir/
+          - cp resources/pictures/milkytracker.png /build/_CPack_Packages/Linux/TGZ
           - cp resources/pictures/milkytracker.png AppDir/
           - mv -v build/src/tracker/milkytracker AppDir/usr/bin/MilkyTracker
           - ls -a
